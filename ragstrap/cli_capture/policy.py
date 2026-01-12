@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from ragstrap.cli_detect.rust import is_rust_cli
 
 

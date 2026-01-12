@@ -1,6 +1,6 @@
 [project]
 name = "ragstrap"
-version = "0.1.1"
+version = "0.1.2"
 description = "Fetch, distill, and store authoritative references for external libraries"
 readme = "README.md"
 requires-python = ">=3.9"

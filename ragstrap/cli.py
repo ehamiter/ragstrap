@@ -1,18 +1,20 @@
-import typer
-from rich import print
-from pathlib import Path
-from datetime import datetime
-from requests import HTTPError
 import json
+from datetime import datetime
 from importlib.metadata import version
+from pathlib import Path
 
-from ragstrap.util.github import parse_github_repo
-from ragstrap.fetch.github import fetch_repo_recursive
-from ragstrap.index.generate import generate_index
-from ragstrap.cli_detect.rust import is_rust_cli
-from ragstrap.cli_capture.rust import cargo_build, capture_help
+import typer
+from requests import HTTPError
+from rich import print
+
 from ragstrap.cli_capture.policy import should_auto_capture_cli
+from ragstrap.cli_capture.rust import capture_help, cargo_build
+from ragstrap.cli_detect.rust import is_rust_cli
+from ragstrap.examples.harvest import harvest_examples
+from ragstrap.fetch.github import fetch_repo_recursive
 from ragstrap.fetch.github_archive import download_repo_archive
+from ragstrap.index.generate import generate_index
+from ragstrap.util.github import parse_github_repo
 
 app = typer.Typer(
     help="ragstrap — bootstrap authoritative references for external tools",
@@ -82,6 +84,10 @@ def fetch(
         print("[green]CLI help captured[/green]")
     else:
         print("[dim]Skipping CLI help capture[/dim]")
+
+    examples_dir = base / "examples"
+    harvest_examples(raw, examples_dir)
+    print("[green]Examples harvested[/green]")
 
     print("[green]Done[/green]")
 

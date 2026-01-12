@@ -1,7 +1,8 @@
-import requests
 import sys
 from pathlib import Path
 from typing import Iterable
+
+import requests
 
 GITHUB_API = "https://api.github.com"
 

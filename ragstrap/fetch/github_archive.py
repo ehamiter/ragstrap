@@ -1,9 +1,10 @@
-import requests
-import tarfile
 import io
 import os
 import sys
+import tarfile
 from pathlib import Path
+
+import requests
 
 
 def download_repo_archive(owner: str, repo: str, dest: Path):
