@@ -15,7 +15,7 @@ def download_repo_archive(owner: str, repo: str, dest: Path):
         headers["Authorization"] = f"Bearer {token}"
 
     resp = requests.get(url, headers=headers, stream=True)
-    
+
     if resp.status_code == 403:
         # Check if it's a rate limit error
         rate_limit_header = resp.headers.get("X-RateLimit-Remaining")
@@ -23,7 +23,7 @@ def download_repo_archive(owner: str, repo: str, dest: Path):
             print("GitHub API rate limit exceeded.", file=sys.stderr)
             print("Set GITHUB_TOKEN to avoid this.", file=sys.stderr)
             sys.exit(1)
-    
+
     resp.raise_for_status()
 
     tar = tarfile.open(fileobj=io.BytesIO(resp.content))

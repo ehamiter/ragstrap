@@ -13,7 +13,7 @@ def fetch_repo_contents(
 ) -> list[dict]:
     url = f"{GITHUB_API}/repos/{owner}/{repo}/contents/{path}"
     resp = requests.get(url)
-    
+
     if resp.status_code == 403:
         # Check if it's a rate limit error
         rate_limit_header = resp.headers.get("X-RateLimit-Remaining")
@@ -21,7 +21,7 @@ def fetch_repo_contents(
             print("GitHub API rate limit exceeded.", file=sys.stderr)
             print("Set GITHUB_TOKEN to avoid this.", file=sys.stderr)
             sys.exit(1)
-    
+
     resp.raise_for_status()
     return resp.json()
 
@@ -31,6 +31,7 @@ def download_file(url: str, dest: Path):
     r = requests.get(url)
     r.raise_for_status()
     dest.write_bytes(r.content)
+
 
 def fetch_repo_recursive(
     owner: str,

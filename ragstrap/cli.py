@@ -19,6 +19,7 @@ app = typer.Typer(
     add_completion=False,
 )
 
+
 def _version_callback(value: bool):
     if value:
         print(version("ragstrap"))
@@ -70,9 +71,8 @@ def fetch(
     generate_index(base)
     print("[green]Index generated[/green]")
 
-    do_capture = (
-        capture_cli is True
-        or (capture_cli is None and should_auto_capture_cli(raw))
+    do_capture = capture_cli is True or (
+        capture_cli is None and should_auto_capture_cli(raw)
     )
 
     if do_capture:
@@ -118,7 +118,7 @@ def callback(
         callback=_version_callback,
         is_eager=True,
         help="Show version and exit",
-    )
+    ),
 ):
     pass
 

@@ -52,16 +52,13 @@ def detect_readme(raw: Path) -> Path | None:
 
 def list_dirs(raw: Path) -> list[str]:
     return sorted(
-        p.name for p in raw.iterdir()
-        if p.is_dir() and not p.name.startswith(".")
+        p.name for p in raw.iterdir() if p.is_dir() and not p.name.startswith(".")
     )
 
 
 def list_files(raw: Path) -> list[str]:
-    return sorted(
-        p.name for p in raw.iterdir()
-        if p.is_file()
-    )
+    return sorted(p.name for p in raw.iterdir() if p.is_file())
+
 
 def generate_index(reference_dir: Path):
     raw = reference_dir / "raw"
@@ -125,4 +122,3 @@ def generate_index(reference_dir: Path):
 
     index_path = reference_dir / "index.md"
     index_path.write_text("\n".join(lines))
-

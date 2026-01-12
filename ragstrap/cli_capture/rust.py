@@ -20,6 +20,7 @@ def cargo_build(raw: Path) -> Path:
 
     return bins[0]
 
+
 def capture_help(binary: Path, out_dir: Path):
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -46,4 +47,3 @@ def capture_help(binary: Path, out_dir: Path):
 
     for cmd in subcommands:
         run_help([cmd, "--help"], cmd)
-
