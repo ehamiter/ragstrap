@@ -1,9 +1,10 @@
-# ragstrap
+# ragstrap <img src="ragstrap.png" alt="ragstrap mascot" width="200" align="right"/>
 
 ragstrap is a CLI that builds local reference snapshots from GitHub repositories for
 RAG workflows. It downloads the repo archive into a `references/<name>/raw` folder,
 records metadata, generates an `index.md`, and can optionally capture `--help` output
 for Rust CLIs.
+
 
 ## Install (preferred)
 
