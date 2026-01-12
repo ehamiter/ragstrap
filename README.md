@@ -26,12 +26,21 @@ uv tool install -e .
 ragstrap fetch https://github.com/OWNER/REPO
 ```
 
+Other commands:
+
+```sh
+ragstrap list
+ragstrap info <name>
+ragstrap update <name>
+```
+
 Common flags:
 
 - `--name/-n`: Name the reference directory (defaults to the repo name).
 - `--force/-f`: Overwrite an existing reference directory.
 - `--capture-cli/--no-capture-cli`: Capture CLI help output; auto-enabled for Rust
   CLIs when `Cargo.toml` and a `src/main.rs` (or `[[bin]]`) are present.
+- `--json`: Output machine-readable JSON (supported by `list` and `info`).
 
 ## Output layout
 
