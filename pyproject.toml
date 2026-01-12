@@ -1,0 +1,20 @@
+[project]
+name = "ragstrap"
+version = "0.1.1"
+description = "Fetch, distill, and store authoritative references for external libraries"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Eric Hamiter" }]
+
+dependencies = [
+  "typer>=0.12",
+  "rich>=13.0",
+  "requests>=2.31",
+]
+
+[project.scripts]
+ragstrap = "ragstrap.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
