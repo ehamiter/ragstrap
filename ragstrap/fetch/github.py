@@ -20,7 +20,7 @@ def fetch_repo_contents(
         rate_limit_header = resp.headers.get("X-RateLimit-Remaining")
         if rate_limit_header == "0" or "rate limit" in resp.text.lower():
             print("GitHub API rate limit exceeded.", file=sys.stderr)
-            print("Set GITHUB_TOKEN to avoid this.", file=sys.stderr)
+            print("Set RAGSTRAP_GITHUB_TOKEN to avoid this.", file=sys.stderr)
             sys.exit(1)
 
     resp.raise_for_status()

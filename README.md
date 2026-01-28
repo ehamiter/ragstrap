@@ -55,5 +55,13 @@ references/<name>/
 ## Notes
 
 - Python >= 3.9 is required.
-- GitHub API rate limits apply; set `GITHUB_TOKEN` to increase the limit.
+- GitHub API rate limits apply; set `RAGSTRAP_GITHUB_TOKEN` to increase the limit.
 - CLI capture for Rust runs `cargo build --release` and requires a Rust toolchain.
+
+## Setting Github Personal Access Token
+
+1. Go to [https://github.com/settings/tokens](https://github.com/settings/tokens)
+2. Select "Generate new token" => "Generate new token (classic)"
+3. Set expiration to desired time / No expiration
+4. Check `public_repo` (Access public repositories)
+5. Generate token
