@@ -1,6 +1,17 @@
 from pathlib import Path
 
 
+def _has_xcode_project(raw: Path) -> bool:
+    try:
+        for entry in raw.iterdir():
+            name = entry.name
+            if name.endswith(".xcodeproj") or name.endswith(".xcworkspace"):
+                return True
+    except FileNotFoundError:
+        return False
+    return False
+
+
 def detect_languages(raw: Path) -> tuple[str, list[str]]:
     """
     Detect primary and secondary languages using strong repository signals.
@@ -25,6 +36,9 @@ def detect_languages(raw: Path) -> tuple[str, list[str]]:
         "go": [
             "go.mod",
         ],
+        "swift": [
+            "Package.swift",
+        ],
     }
 
     detected: list[str] = []
@@ -34,6 +48,9 @@ def detect_languages(raw: Path) -> tuple[str, list[str]]:
             if (raw / f).exists():
                 detected.append(language)
                 break
+
+    if _has_xcode_project(raw) and "swift" not in detected:
+        detected.append("swift")
 
     if not detected:
         return "unknown", []
