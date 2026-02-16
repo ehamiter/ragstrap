@@ -24,8 +24,6 @@
 - When touching critical logic (fetching, indexing, CLI capture), include a brief manual verification note in the PR (example: `ragstrap fetch https://github.com/psf/requests`).
 
 ## Commit & Pull Request Guidelines
-- Commit history uses short, descriptive summaries (e.g., “Update README…”, “bump version”). Stick to concise, imperative summaries without prefixes unless a convention is introduced.
-- PRs should include: a clear description of behavior changes, any relevant screenshots/log snippets, and a note about manual verification steps.
 - Agents must not run git operations beyond viewing diffs. No commits, pulls, pushes, rebases, or branch changes; the user handles all VCS actions.
 
 ## Security & Configuration Tips
