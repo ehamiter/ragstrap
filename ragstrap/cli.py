@@ -1,4 +1,5 @@
 import json
+import os
 import shutil
 from datetime import datetime
 from importlib.metadata import version
@@ -21,6 +22,12 @@ app = typer.Typer(
     help="ragstrap — bootstrap authoritative references for external tools",
     add_completion=False,
 )
+
+
+def _references_root() -> Path:
+    """Return the shared references directory, respecting RAGSTRAP_HOME."""
+    home = Path(os.environ.get("RAGSTRAP_HOME", Path.home() / ".ragstrap"))
+    return home / "references"
 
 
 def _load_meta(reference_dir: Path, name: str) -> dict:
@@ -90,7 +97,7 @@ def fetch(
     owner, repo = parse_github_repo(source)
     ref_name = name or repo
 
-    base = Path("references") / ref_name
+    base = _references_root() / ref_name
     raw = base / "raw"
 
     if base.exists() and not force:
@@ -148,7 +155,7 @@ def update(
     """
     Update an existing reference.
     """
-    base = Path("references") / name
+    base = _references_root() / name
     if not base.exists():
         raise typer.Abort(f"Reference '{name}' not found")
     if not base.is_dir():
@@ -219,7 +226,7 @@ def list(
     """
     List available references.
     """
-    base = Path("references")
+    base = _references_root()
     if not base.exists():
         if json_output:
             print("[]")
@@ -227,7 +234,7 @@ def list(
             print("[dim]No references found[/dim]")
         return
     if not base.is_dir():
-        raise typer.Abort("'references' exists but is not a directory")
+        raise typer.Abort(f"'{base}' exists but is not a directory")
 
     refs = sorted(
         (p for p in base.iterdir() if p.is_dir() and not p.name.startswith(".")),
@@ -285,7 +292,7 @@ def info(
     """
     Show metadata about a reference.
     """
-    base = Path("references") / name
+    base = _references_root() / name
     if not base.exists():
         raise typer.Abort(f"Reference '{name}' not found")
     if not base.is_dir():

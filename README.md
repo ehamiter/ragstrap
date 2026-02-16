@@ -1,9 +1,10 @@
 # ragstrap <img src="ragstrap.png" alt="ragstrap mascot" width="200" align="right"/>
 
 ragstrap is a CLI that builds local reference snapshots from GitHub repositories for
-RAG workflows. It downloads the repo archive into a `references/<name>/raw` folder,
+RAG workflows. It downloads the repo archive into `~/.ragstrap/references/<name>/raw`,
 records metadata, generates an `index.md`, and can optionally capture `--help` output
-for Rust CLIs.
+for Rust CLIs. References are stored in a shared location so multiple projects can
+reuse the same snapshots without duplicating disk space.
 
 
 ## Install (preferred)
@@ -45,7 +46,7 @@ Common flags:
 ## Output layout
 
 ```text
-references/<name>/
+~/.ragstrap/references/<name>/
   meta.json
   index.md
   raw/...
@@ -55,6 +56,8 @@ references/<name>/
 ## Notes
 
 - Python >= 3.9 is required.
+- References are stored in `~/.ragstrap/references/` by default. Set `RAGSTRAP_HOME` to
+  override the base directory (e.g. `RAGSTRAP_HOME=/tmp/ragstrap`).
 - GitHub API rate limits apply; set `RAGSTRAP_GITHUB_TOKEN` to increase the limit.
 - CLI capture for Rust runs `cargo build --release` and requires a Rust toolchain.
 

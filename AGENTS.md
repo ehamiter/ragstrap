@@ -4,13 +4,13 @@
 - `ragstrap/` holds the CLI implementation and supporting modules (fetchers, index generation, CLI detection/capture, utilities).
 - `ragstrap/examples/` contains example scripts for harvesting references.
 - `dist/` stores built artifacts (if present).
-- `references/` is created at runtime by the CLI (`ragstrap fetch`) and is not committed by default.
+- `~/.ragstrap/references/` is the shared reference store created by `ragstrap fetch`. Override with `RAGSTRAP_HOME`.
 - Top-level docs and metadata live in `README.md`, `LICENSE`, and `pyproject.toml`.
 
 ## Build, Test, and Development Commands
 - `uv tool install ragstrap`: installs the published CLI from the default index (PyPI unless configured otherwise).
 - `uv tool install -e .`: installs the local repo in editable mode for development.
-- `ragstrap fetch https://github.com/OWNER/REPO`: builds a local reference snapshot in `references/<name>/`.
+- `ragstrap fetch https://github.com/OWNER/REPO`: builds a local reference snapshot in `~/.ragstrap/references/<name>/`.
 - `ragstrap list` / `ragstrap info <name>` / `ragstrap update <name>`: manage existing references.
 
 ## Coding Style & Naming Conventions
